@@ -8,7 +8,7 @@ public class HelloResource {
 	
 	@GetMapping("/hello-message")
 	public HelloResponse getMessage() {
-		return new HelloResponse("Hello!");
+		return new HelloResponse("Hello World!");
 	}
 
 }
