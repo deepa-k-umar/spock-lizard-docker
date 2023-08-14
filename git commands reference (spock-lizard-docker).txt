@@ -1,0 +1,1876 @@
+***) Index for GitHub Commands :
+
+I). Working with Local Git Commands and Local Repository
+II). Creating a GitHub (Remote) Repository
+III). Pushing on GitHub (Remote Repository)
+IV). Creating and Pushing a Branch on GitHub (Remote) Repository
+V). Pulling from a GitHub (Remote) Repository
+VI). Merging and Pushing Branches
+VII). Forking, Cloning, Pulling a Remote (GitHub) Repository into your Local Repository, Pushing a Local Changed Repository to the Remote (GitHub) Repository
+VIII). Creating a Pull Request in GitHub (Remote) Repository
+IX). Merging a Pull Request and Resolving Merge Conflicts on GitHub (Remote) Repository
+
+
+13/07/2023
+
+I). Working with Local Git Commands and Local Repository :
+
+C:\Users\hp>E:
+E:\>mkdir sample-repository
+E:\>cd sample-repository
+E:\sample-repository>ls
+
+E:\sample-repository>git --version
+git version 2.41.0.windows.1
+
+E:\sample-repository>git config user.name
+YashK
+
+E:\sample-repository>git init
+Initialized empty Git repository in E:/sample-repository/.git/
+
+E:\sample-repository>ls
+README.txt
+
+E:\sample-repository>git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        README.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git add .
+
+E:\sample-repository>git status
+On branch master
+
+No commits yet
+
+Changes to be committed:
+  (use "git rm --cached <file>..." to unstage)
+        new file:   HelloWorld.txt
+
+E:\sample-repository>git commit -m "first commit for project by yash"
+[master (root-commit) 3843b2e] first commit for project by yash
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 HelloWorld.txt
+
+E:\sample-repository>git status
+On branch master
+nothing to commit, working tree clean
+
+E:\sample-repository>git config --global user.name "YashK"
+
+E:\sample-repository>git config --global user.email "yashkadyan17@gmail.com"
+
+E:\sample-repository>git config --global --edit
+[user]
+        email = yashkadyan17@gmail.com
+        name = YashK
+[filter "lfs"]
+        smudge = git-lfs smudge -- %f
+        process = git-lfs filter-process
+        required = true
+        clean = git-lfs clean -- %f
+~
+~
+~
+~
+:wq  (Esc + Shift + : + wq)
+
+E:\sample-repository>type HelloWorld.txt
+
+E:\sample-repository>notepad HelloWorld.txt
+
+E:\sample-repository>type HelloWorld.txt
+Hi! How are you?
+
+E:\sample-repository>git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HelloWorld.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git commit -m "HelloWorld.txt is modified!"
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HelloWorld.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HelloWorld.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add HelloWorld.txt
+
+E:\sample-repository>git commit -m "HelloWorld.txt is modified!"
+[master 5dd17b5] HelloWorld.txt is modified!
+ 1 file changed, 1 insertion(+)
+
+E:\sample-repository>git log
+commit 5dd17b5eb47ac930d6253f0a1621d79d68eee441 (HEAD -> master)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:07:16 2023 +0530
+
+    HelloWorld.txt is modified!
+
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+E:\sample-repository>git checkout 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Note: switching to '3843b2e9eb0e7dfe0b62c976320cacc9be28ba40'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 3843b2e first commit for project by yash
+
+E:\sample-repository>type HelloWorld.txt
+
+E:\sample-repository>git log
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40 (HEAD)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+E:\sample-repository>git checkout master
+Previous HEAD position was 3843b2e first commit for project by yash
+Switched to branch 'master'
+
+E:\sample-repository>git log
+commit 5dd17b5eb47ac930d6253f0a1621d79d68eee441 (HEAD -> master)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:07:16 2023 +0530
+
+    HelloWorld.txt is modified!
+
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+E:\sample-repository>type HelloWorld.txt
+Hi! How are you?
+
+E:\sample-repository>type nul > Demo.txt
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt
+
+E:\sample-repository>notepad Demo.txt
+
+E:\sample-repository>type Demo.txt
+asd
+asdf
+asdfksjdsujdsfnnj
+sjdbwhdbhsm
+asdnbs
+hdf
+
+E:\sample-repository>git status
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        Demo.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git add Demo.txt
+
+E:\sample-repository>git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        new file:   Demo.txt
+
+E:\sample-repository>git commit
+
+new demo text file is created!
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# On branch master
+# Changes to be committed:
+#       new file:   Demo.txt
+#
+~                                                                                                                                    ~                                                                                                                                    ~                                                                                                                                    ~                                                                                                                                    ~                                                                                                                                    
+:wq (Esc + Shift + : wq)
+
+E:\sample-repository>git commit
+[master 3815c03] new demo text file is created!
+ 1 file changed, 6 insertions(+)
+ create mode 100644 Demo.txt
+
+E:\sample-repository>git status
+On branch master
+nothing to commit, working tree clean
+
+E:\sample-repository>git add .
+
+E:\sample-repository>git log
+commit 3815c0352d2ec9da29f8f225fa22a9068123aae8 (HEAD -> master)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:27:54 2023 +0530
+
+    new demo text file is created!
+
+commit 5dd17b5eb47ac930d6253f0a1621d79d68eee441
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:07:16 2023 +0530
+
+    HelloWorld.txt is modified!
+
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+E:\sample-repository>git commit -m "4th commit"
+On branch master
+nothing to commit, working tree clean
+
+E:\sample-repository>git log
+commit 3815c0352d2ec9da29f8f225fa22a9068123aae8 (HEAD -> master)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:27:54 2023 +0530
+
+    new demo text file is created!
+
+commit 5dd17b5eb47ac930d6253f0a1621d79d68eee441
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:07:16 2023 +0530
+
+    HelloWorld.txt is modified!
+
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+
+II). Creating a GitHub (Remote) Repository :
+
+E:\sample-repository>gh repo create
+'gh' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>gh repo create dummy-project --private
+'gh' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>choco install gh
+'choco' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>gh --version
+'gh' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>choco --version
+'choco' is not recognized as an internal or external command,
+operable program or batch file.
+
+(Run PowerShell As Administrator)
+PS C:\WINDOWS\system32> winget install --id GitHub.cli
+The `msstore` source requires that you view the following agreements before using.
+Terms of Transaction: https://aka.ms/microsoft-store-terms-of-transaction
+The source requires the current machine's 2-letter geographic region to be sent to the backend service to function properly (ex. "US").
+
+Do you agree to all the source agreements terms?
+[Y] Yes  [N] No: Y
+Found GitHub CLI [GitHub.cli] Version 2.32.0
+This application is licensed to you by its owner.
+Microsoft is not responsible for, nor does it grant any licenses to, third-party packages.
+Downloading https://github.com/cli/cli/releases/download/v2.32.0/gh_2.32.0_windows_amd64.msi
+  ██████████████████████████████  10.0 MB / 10.0 MB
+Successfully verified installer hash
+Starting package install...
+Successfully installed
+
+PS C:\WINDOWS\system32> exit
+
+(Open New Terminal)
+C:\Users\hp>gh --version
+gh version 2.32.0 (2023-07-11)
+https://github.com/cli/cli/releases/tag/v2.32.0
+
+C:\Users\hp>E:
+
+E:\>cd sample-repository
+
+E:\sample-repository>git status
+On branch master
+nothing to commit, working tree clean
+
+E:\sample-repository>gh repo create dummy-project --private
+To get started with GitHub CLI, please run:  gh auth login
+Alternatively, populate the GH_TOKEN environment variable with a GitHub API authentication token.
+
+E:\sample-repository>gh auth login
+? What account do you want to log into?  [Use arrows to move, type to filter]
+> GitHub.com
+  GitHub Enterprise Server
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations?  [Use arrows to move, type to filter]
+> HTTPS
+  SSH
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? (Y/n) Y
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI?  [Use arrows to move, type to filter]
+  Login with a web browser
+> Paste an authentication token
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Paste an authentication token
+Tip: you can generate a Personal Access Token here https://github.com/settings/tokens
+The minimum required scopes are 'repo', 'read:org', 'workflow'.
+? Paste your authentication token:
+
+(Click on this Link and Generate a Personal Access Token. By Selecting all Checkboxes and Generate Token. Give Note : Personal Access Token, Token Expiry : 30 days)
+Personal Access Token Generated : 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
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Paste an authentication token
+Tip: you can generate a Personal Access Token here https://github.com/settings/tokens
+The minimum required scopes are 'repo', 'read:org', 'workflow'.
+? Paste your authentication token: ****************************************
+
+E:\sample-repository>gh auth login
+? What account do you want to log into? GitHub.com
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+? How would you like to authenticate GitHub CLI? Paste an authentication token
+Tip: you can generate a Personal Access Token here https://github.com/settings/tokens
+The minimum required scopes are 'repo', 'read:org', 'workflow'.
+? Paste your authentication token: ****************************************
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as YashKadyan
+
+E:\sample-repository>gh repo create dummy-project --private
+✓ Created repository YashKadyan/dummy-project on GitHub
+
+E:\sample-repository>exit
+
+
+14/07/2023
+
+III). Pushing on GitHub (Remote Repository) :
+
+C:\Users\hp>E:
+
+E:\>cd sample-repository
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt
+
+E:\sample-repository>git branch -M main
+
+E:\sample-repository>git remote add origin https://github.com/YashKadyan/dummy-project.git
+
+E:\sample-repository>git log
+commit 3815c0352d2ec9da29f8f225fa22a9068123aae8 (HEAD -> main)
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:27:54 2023 +0530
+
+    new demo text file is created!
+
+commit 5dd17b5eb47ac930d6253f0a1621d79d68eee441
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Fri Jul 14 00:07:16 2023 +0530
+
+    HelloWorld.txt is modified!
+
+commit 3843b2e9eb0e7dfe0b62c976320cacc9be28ba40
+Author: YashK <yashkadyan17@gmail.com>
+Date:   Thu Jul 13 23:35:40 2023 +0530
+
+    first commit for project by yash
+
+E:\sample-repository>git status
+On branch main
+nothing to commit, working tree clean
+
+E:\sample-repository>git push -u origin main
+Enumerating objects: 9, done.
+Counting objects: 100% (9/9), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (9/9), 779 bytes | 779.00 KiB/s, done.
+Total 9 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/YashKadyan/dummy-project.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+** Refresh your GitHub Account to see the Pushed Files.
+
+
+IV). Creating and Pushing a Branch on GitHub (Remote) Repository :
+
+E:\sample-repository>git branch b1
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/main
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+
+E:\sample-repository>type nul > sum.java
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");
+        }
+}
+
+E:\sample-repository>git branch -a
+* b1
+  main
+  remotes/origin/main
+
+E:\sample-repository>git status
+On branch b1
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        sum.java
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java created in b1"
+[b1 01a066b] sum.java created in b1
+ 1 file changed, 7 insertions(+)
+ create mode 100644 sum.java
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");sddmsad
+        }
+}
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java modified in b1"
+[b1 e1a6c24] sum.java modified in b1
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git add sum.java
+fatal: pathspec 'sum.java' did not match any files
+
+E:\sample-repository>git commit -m "sum.java added in main branch"
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git status
+On branch b1
+nothing to commit, working tree clean
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt
+
+E:\sample-repository>type nul > sum.java
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        sum.java
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/main
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java created in main branch"
+[main 136954c] sum.java created in main branch
+ 1 file changed, 7 insertions(+)
+ create mode 100644 sum.java
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");sddmsad
+        }
+}
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");jsfsdjb
+        }
+}
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sum.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java in b1 branch modified!"
+[main 54915af] sum.java in b1 branch modified!
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+E:\sample-repository>git checkout main
+Already on 'main'
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+E:\sample-repository>git status
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java in main branch modified!"
+On branch main
+Your branch is ahead of 'origin/main' by 2 commits.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git push -u origin main
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 638 bytes | 638.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), done.
+To https://github.com/YashKadyan/dummy-project.git
+   3815c03..54915af  main -> main
+branch 'main' set up to track 'origin/main'.
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/main
+
+E:\sample-repository>type sum.java
+'typesum.java' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");
+        }
+}
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");sdfns
+        }
+}
+
+E:\sample-repository>git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sum.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java in main branch modified!"
+[main 2aae041] sum.java in main branch modified!
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+E:\sample-repository>git status
+On branch main
+Your branch is ahead of 'origin/main' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git push -u origin main
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 303 bytes | 303.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/YashKadyan/dummy-project.git
+   54915af..2aae041  main -> main
+branch 'main' set up to track 'origin/main'.
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/main
+
+E:\sample-repository>git push -u origin b1
+Enumerating objects: 7, done.
+Counting objects: 100% (7/7), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (6/6), 635 bytes | 317.00 KiB/s, done.
+Total 6 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), done.
+remote:
+remote: Create a pull request for 'b1' on GitHub by visiting:
+remote:      https://github.com/YashKadyan/dummy-project/pull/new/b1
+remote:
+To https://github.com/YashKadyan/dummy-project.git
+ * [new branch]      b1 -> b1
+branch 'b1' set up to track 'origin/b1'.
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");sddmsad
+        }
+}
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>git status
+On branch b1
+Your branch is up to date with 'origin/b1'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   sum.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java in branch b1 modified!"
+[b1 27b6ac2] sum.java in branch b1 modified!
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+E:\sample-repository>git branch -a
+* b1
+  main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>git push -u origin b1
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 300 bytes | 300.00 KiB/s, done.
+Total 3 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+To https://github.com/YashKadyan/dummy-project.git
+   e1a6c24..27b6ac2  b1 -> b1
+branch 'b1' set up to track 'origin/b1'.
+
+
+V). Pulling from a GitHub (Remote) Repository :
+
+E:\sample-repository>git branch -a
+  b1
+* main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>git branch -a
+* b1
+  main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>git status
+On branch b1
+Your branch is up to date with 'origin/b1'.
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git pull
+Already up to date.
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>git branch branch2
+
+E:\sample-repository>git checkout branch2
+Switched to branch 'branch2'
+
+E:\sample-repository>git branch -a
+  b1
+* branch2
+  main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>type sum.java
+class sum
+{
+        public static void main()
+        {
+                System.out.print("In sum.java file");
+        }
+}
+
+E:\sample-repository>type nul > demo.txt
+
+E:\sample-repository>notepad demo.txt
+
+E:\sample-repository>git status
+On branch branch2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Demo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add demo.txt
+
+E:\sample-repository>git commit -m "branch2"
+On branch branch2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Demo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>notepad demo.txt
+
+E:\sample-repository>git status
+On branch branch2
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   Demo.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git branch -a
+  b1
+* branch2
+  main
+  remotes/origin/b1
+  remotes/origin/main
+
+E:\sample-repository>git add Demo.txt
+
+E:\sample-repository>git commit -m "branch2"
+[branch2 07b3c03] branch2
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+E:\sample-repository>git push -u origin branch2
+Enumerating objects: 5, done.
+Counting objects: 100% (5/5), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 326 bytes | 326.00 KiB/s, done.
+Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+remote:
+remote: Create a pull request for 'branch2' on GitHub by visiting:
+remote:      https://github.com/YashKadyan/dummy-project/pull/new/branch2
+remote:
+To https://github.com/YashKadyan/dummy-project.git
+ * [new branch]      branch2 -> branch2
+branch 'branch2' set up to track 'origin/branch2'.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git branch -a
+  b1
+* branch2
+  main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/main
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git branch -a
+  b1
+  branch2
+* main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/main
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git pull
+Already up to date.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+
+VI). Merging and Pushing Branches :
+
+E:\sample-repository>git branch -v branch3
+
+E:\sample-repository>git branch -a
+* b1
+  branch2
+  branch3
+  main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/main
+
+E:\sample-repository>git checkout branch3
+Switched to branch 'branch3'
+
+E:\sample-repository>type nul > t.txt
+
+E:\sample-repository>notepad t.txt
+
+E:\sample-repository>type t.txt
+hsdgsh
+snbshj
+sbhsbc
+nxcbshj
+sjcb
+jdscbdsjb
+scbjsnc
+
+E:\sample-repository>git add t.txt
+
+E:\sample-repository>git commit -m "branch3 t.txt created!"
+[branch3 def065b] branch3 t.txt created!
+ 1 file changed, 7 insertions(+)
+ create mode 100644 t.txt
+
+E:\sample-repository>git branch -a
+  b1
+  branch2
+* branch3
+  main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/main
+
+E:\sample-repository>git merge b1
+Already up to date.
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>git branch -a
+* b1
+  branch2
+  branch3
+  main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/main
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  sum.java
+
+E:\sample-repository>git merge branch3
+Updating 27b6ac2..def065b
+Fast-forward
+ t.txt | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 t.txt
+
+E:\sample-repository>git status
+On branch b1
+Your branch is ahead of 'origin/b1' by 1 commit.
+  (use "git push" to publish your local commits)
+
+nothing to commit, working tree clean
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git push -u origin branch3
+Enumerating objects: 4, done.
+Counting objects: 100% (4/4), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 314 bytes | 314.00 KiB/s, done.
+Total 3 (delta 1), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (1/1), completed with 1 local object.
+remote:
+remote: Create a pull request for 'branch3' on GitHub by visiting:
+remote:      https://github.com/YashKadyan/dummy-project/pull/new/branch3
+remote:
+To https://github.com/YashKadyan/dummy-project.git
+ * [new branch]      branch3 -> branch3
+branch 'branch3' set up to track 'origin/branch3'.
+
+E:\sample-repository>git push -u origin b1
+Total 0 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/YashKadyan/dummy-project.git
+   27b6ac2..def065b  b1 -> b1
+branch 'b1' set up to track 'origin/b1'.
+
+
+VII). Forking, Cloning, Pulling a Remote (GitHub) Repository into your Local Repository, Pushing a Local Changed Repository to the Remote (GitHub) Repository :
+
+E:\sample-repository>gh auth login --web
+? You're already logged into github.com. Do you want to re-authenticate? Yes
+? What is your preferred protocol for Git operations? HTTPS
+? Authenticate Git with your GitHub credentials? Yes
+
+! First copy your one-time code: 202A-3A83
+Press Enter to open github.com in your browser...
+✓ Authentication complete.
+- gh config set -h github.com git_protocol https
+✓ Configured git protocol
+✓ Logged in as YashKadyan
+
+E:\sample-repository>gh repo fork https://github.com/learn-devops-fast/spock-lizard-docker.git --clone
+✓ Created fork YashKadyan/spock-lizard-docker
+Cloning into 'spock-lizard-docker'...
+remote: Enumerating objects: 635, done.
+remote: Counting objects: 100% (184/184), done.
+remote: Compressing objects: 100% (92/92), done.
+Receiving objects:  97% (616/635), 35.08 MiB | 950.00 KiB/seused 451
+Receiving objects: 100% (635/635), 35.37 MiB | 535.00 KiB/s, done.
+Resolving deltas: 100% (195/195), done.
+From https://github.com/learn-devops-fast/spock-lizard-docker
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1
+ * [new branch]      dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1 -> upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1
+ * [new branch]      master     -> upstream/master
+ * [new branch]      test       -> upstream/test
+✓ Cloned fork
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  spock-lizard-docker  sum.java
+
+E:\sample-repository>cd spock-lizard-docker
+
+E:\sample-repository\spock-lizard-docker>ls
+Dockerfile  Jenkinsfile  install-mdjg.sh  lab-files  mvnw  mvnw.cmd  pom-with-site.xml  pom.xml  src  target
+
+E:\sample-repository\spock-lizard-docker>git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1
+  remotes/origin/master
+  remotes/origin/test
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1
+  remotes/upstream/master
+  remotes/upstream/test
+
+E:\sample-repository\spock-lizard-docker>git checkout main
+error: pathspec 'main' did not match any file(s) known to git
+
+E:\sample-repository\spock-lizard-docker>git pull https://github.com/YashKadyan/spock-lizard-docker.git
+From https://github.com/YashKadyan/spock-lizard-docker
+ * branch            HEAD       -> FETCH_HEAD
+Already up to date.
+
+E:\sample-repository\spock-lizard-docker>ls
+Dockerfile  Jenkinsfile  install-mdjg.sh  lab-files  mvnw  mvnw.cmd  pom-with-site.xml  pom.xml  src  target
+
+E:\sample-repository\spock-lizard-docker>cd ..
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  spock-lizard-docker  sum.java
+
+E:\sample-repository>cd spock-lizard-docker
+
+E:\sample-repository\spock-lizard-docker>ls
+Dockerfile  Jenkinsfile  install-mdjg.sh  lab-files  mvnw  mvnw.cmd  pom-with-site.xml  pom.xml  src  target
+
+E:\sample-repository\spock-lizard-docker>cd src/
+
+E:\sample-repository\spock-lizard-docker\src>ls
+main
+
+E:\sample-repository\spock-lizard-docker\src>cd mai
+The system cannot find the path specified.
+
+E:\sample-repository\spock-lizard-docker\src>cd main
+
+E:\sample-repository\spock-lizard-docker\src\main>ls
+com  java  resources
+
+E:\sample-repository\spock-lizard-docker\src\main>cd java
+
+E:\sample-repository\spock-lizard-docker\src\main\java>ls
+com
+
+E:\sample-repository\spock-lizard-docker\src\main\java>cd com
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com>ls
+mcnz  webage
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com>cd webage
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage>ls
+spring
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage>cd spring
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring>ls
+samples
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring>cd samples
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples>ls
+hello
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples>cd hello
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello>ls
+api
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello>cd api
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>ls
+HelloResource.java  HelloResponse.java
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>notepad HelloResource.java
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   HelloResource.java
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git add HelloResource.java
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   HelloResource.java
+
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git commit -m "HelloResource.java modified!"
+[master e7f4e0d] HelloResource.java modified!
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>type HelloResource.java
+package com.webage.spring.samples.hello.api;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloResource {
+
+        @GetMapping("/hello-message")
+        public HelloResponse getMessage() {
+                return new HelloResponse("Hello World!");
+        }
+
+}
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git branch -m
+fatal: branch name required
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1
+  remotes/origin/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1
+  remotes/origin/master
+  remotes/origin/test
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/org.codehaus.plexus-plexus-utils-3.0.16
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/echo-maven-plugin/src/test/resources/unit/echo-mojo/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/myarchetype/myarchetype/src/main/resources/archetype-resources/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp-release-deploy/mywebapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/mywebapp/junit-junit-4.13.1
+  remotes/upstream/dependabot/maven/lab-files/IN1495_Lab_Files/Solutions/simple-parent/junit-junit-4.13.1
+  remotes/upstream/master
+  remotes/upstream/test
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git branch -M main
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git remote add origin https://github.com/YashKadyan/spock-lizard-docker.git
+error: remote origin already exists.
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>git push -u origin main
+Enumerating objects: 23, done.
+Counting objects: 100% (23/23), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (6/6), done.
+Writing objects: 100% (12/12), 822 bytes | 822.00 KiB/s, done.
+Total 12 (delta 2), reused 0 (delta 0), pack-reused 0
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects.
+remote:
+remote: Create a pull request for 'main' on GitHub by visiting:
+remote:      https://github.com/YashKadyan/spock-lizard-docker/pull/new/main
+remote:
+To https://github.com/YashKadyan/spock-lizard-docker.git
+ * [new branch]      main -> main
+branch 'main' set up to track 'origin/main'.
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>cd
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>cd
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>cd .
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>cd ./././
+
+E:\sample-repository\spock-lizard-docker\src\main\java\com\webage\spring\samples\hello\api>cd ../../../../../../../../../
+
+E:\sample-repository\spock-lizard-docker>cd ..
+
+
+VIII). Creating a Pull Request in GitHub (Remote) Repository :
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  spock-lizard-docker  sum.java
+
+E:\sample-repository>git branch -a
+  b1
+  branch2
+  branch3
+* main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/branch3
+  remotes/origin/main
+
+E:\sample-repository>gh pr list
+no open pull requests in YashKadyan/dummy-project
+
+E:\sample-repository>gh
+Work seamlessly with GitHub from the command line.
+
+USAGE
+  gh <command> <subcommand> [flags]
+
+CORE COMMANDS
+  auth:        Authenticate gh and git with GitHub
+  browse:      Open the repository in the browser
+  codespace:   Connect to and manage codespaces
+  gist:        Manage gists
+  issue:       Manage issues
+  org:         Manage organizations
+  pr:          Manage pull requests
+  project:     Work with GitHub Projects.
+  release:     Manage releases
+  repo:        Manage repositories
+
+GITHUB ACTIONS COMMANDS
+  cache:       Manage Github Actions caches
+  run:         View details about workflow runs
+  workflow:    View details about GitHub Actions workflows
+
+ALIAS COMMANDS
+  co:          Alias for "pr checkout"
+
+ADDITIONAL COMMANDS
+  alias:       Create command shortcuts
+  api:         Make an authenticated GitHub API request
+  completion:  Generate shell completion scripts
+  config:      Manage configuration for gh
+  extension:   Manage gh extensions
+  gpg-key:     Manage GPG keys
+  label:       Manage labels
+  ruleset:     View info about repo rulesets
+  search:      Search for repositories, issues, and pull requests
+  secret:      Manage GitHub secrets
+  ssh-key:     Manage SSH keys
+  status:      Print information about relevant issues, pull requests, and notifications across repositories
+  variable:    Manage GitHub Actions variables
+
+HELP TOPICS
+  actions:     Learn about working with GitHub Actions
+  environment: Environment variables that can be used with gh
+  exit-codes:  Exit codes used by gh
+  formatting:  Formatting options for JSON data exported from gh
+  mintty:      Information about using gh with MinTTY
+  reference:   A comprehensive reference of all gh commands
+
+FLAGS
+  --help      Show help for command
+  --version   Show gh version
+
+EXAMPLES
+  $ gh issue create
+  $ gh repo clone cli/cli
+  $ gh pr checkout 321
+
+LEARN MORE
+  Use 'gh <command> <subcommand> --help' for more information about a command.
+  Read the manual at https://cli.github.com/manual
+
+
+E:\sample-repository>gh --version
+gh version 2.32.0 (2023-07-11)
+https://github.com/cli/cli/releases/tag/v2.32.0
+
+E:\sample-repository>gh pr list --state "all"
+no pull requests match your search in YashKadyan/dummy-project
+
+E:\sample-repository>gh pr list -s "all"
+no pull requests match your search in YashKadyan/dummy-project
+
+E:\sample-repository>gh pr status
+
+Relevant pull requests in YashKadyan/dummy-project
+
+Current branch
+  There is no pull request associated with [main]
+
+Created by you
+  You have no open pull requests
+
+Requesting a code review from you
+  You have no pull requests to review
+
+
+E:\sample-repository>git branch -a
+  b1
+  branch2
+  branch3
+* main
+  remotes/origin/b1
+  remotes/origin/branch2
+  remotes/origin/branch3
+  remotes/origin/main
+
+E:\sample-repository>gh pr create --base main --head b1
+Warning: 1 uncommitted change
+
+Creating pull request for b1 into main in YashKadyan/dummy-project
+
+? Title b1
+? Body <Received>
+? What's next? Submit
+https://github.com/YashKadyan/dummy-project/pull/1
+
+E:\sample-repository>gh pr list
+
+Showing 1 of 1 open pull request in YashKadyan/dummy-project
+
+#1  b1  b1  about 1 minute ago
+
+E:\sample-repository>gh pr list --state "all"
+
+Showing 1 of 1 pull request in YashKadyan/dummy-project that matches your search
+
+#1  b1  b1  about 3 minutes ago
+
+E:\sample-repository>gh pr list -s "all"
+
+Showing 1 of 1 pull request in YashKadyan/dummy-project that matches your search
+
+#1  b1  b1  about 3 minutes ago
+
+E:\sample-repository>gh pr status
+
+Relevant pull requests in YashKadyan/dummy-project
+
+Current branch
+  There is no pull request associated with [main]
+
+Created by you
+  #1  b1 [b1]
+
+Requesting a code review from you
+  You have no pull requests to review
+
+E:\sample-repository>gh pr list --state "closed"
+no pull requests match your search in YashKadyan/dummy-project
+
+E:\sample-repository>gh pr list --label "bug"
+no pull requests match your search in YashKadyan/dummy-project
+
+E:\sample-repository>git branch -l
+  b1
+  branch2
+  branch3
+* main
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is up to date with 'origin/b1'.
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>gh pr create
+Warning: 1 uncommitted change
+a pull request for branch "b1" into branch "main" already exists:
+https://github.com/YashKadyan/dummy-project/pull/1
+
+E:\sample-repository>gh pr create -t "Sample Title" -b "Sample Body"
+Warning: 1 uncommitted change
+a pull request for branch "b1" into branch "main" already exists:
+https://github.com/YashKadyan/dummy-project/pull/1
+
+E:\sample-repository>gh pr list
+
+Showing 1 of 1 open pull request in YashKadyan/dummy-project
+
+#1  b1  b1  about 13 minutes ago
+
+E:\sample-repository>gh pr checkout "1"
+Already on 'b1'
+Your branch is up to date with 'origin/b1'.
+Already up to date.
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>gh pr list --label "bug"
+no pull requests match your search in YashKadyan/dummy-project
+
+E:\sample-repository>alias listprs='gh pr list --label "bug"'
+'alias' is not recognized as an internal or external command,
+operable program or batch file.
+
+
+IX). Merging a Pull Request and Resolving Merge Conflicts on GitHub (Remote) Repository :
+
+E:\sample-repository>gh pr merge 1
+X Pull request #1 is not mergeable: the merge commit cannot be cleanly created.
+To have the pull request merged after all the requirements have been met, add the `--auto` flag.
+Run the following to resolve the merge conflicts locally:
+  gh pr checkout 1 && git fetch origin main && git merge origin/main
+
+E:\sample-repository>gh pr merge "1"
+X Pull request #1 is not mergeable: the merge commit cannot be cleanly created.
+To have the pull request merged after all the requirements have been met, add the `--auto` flag.
+Run the following to resolve the merge conflicts locally:
+  gh pr checkout 1 && git fetch origin main && git merge origin/main
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>gh pr list
+
+Showing 1 of 1 open pull request in YashKadyan/dummy-project
+
+#1  b1  b1  about 1 hour ago
+
+E:\sample-repository>gh pr checkout 1
+Already on 'b1'
+Your branch is up to date with 'origin/b1'.
+Already up to date.
+
+E:\sample-repository>git fetch origin main
+From https://github.com/YashKadyan/dummy-project
+ * branch            main       -> FETCH_HEAD
+
+E:\sample-repository>git merge origin/main
+Auto-merging sum.java
+CONFLICT (add/add): Merge conflict in sum.java
+Automatic merge failed; fix conflicts and then commit the result.
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>git checkout main
+error: you need to resolve your current index first
+sum.java: needs merge
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>ls
+Demo.txt  HelloWorld.txt  spock-lizard-docker  sum.java  t.txt
+
+E:\sample-repository>np sum.java
+'np' is not recognized as an internal or external command,
+operable program or batch file.
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>git merge origin/main
+error: Merging is not possible because you have unmerged files.
+hint: Fix them up in the work tree, and then use 'git add/rm <file>'
+hint: as appropriate to mark resolution and make a commit.
+fatal: Exiting because of an unresolved conflict.
+
+E:\sample-repository>notepad sum.java
+
+E:\sample-repository>git status
+On branch b1
+Your branch is up to date with 'origin/b1'.
+
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both added:      sum.java
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        spock-lizard-docker/
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+E:\sample-repository>git add sum.java
+
+E:\sample-repository>git commit -m "sum.java has some changes in b1"
+[b1 6a33a47] sum.java has some changes in b1
+
+E:\sample-repository>git merge origin/main
+Already up to date.
+
+E:\sample-repository>git branch -1
+error: unknown switch `1'
+usage: git branch [<options>] [-r | -a] [--merged] [--no-merged]
+   or: git branch [<options>] [-f] [--recurse-submodules] <branch-name> [<start-point>]
+   or: git branch [<options>] [-l] [<pattern>...]
+   or: git branch [<options>] [-r] (-d | -D) <branch-name>...
+   or: git branch [<options>] (-m | -M) [<old-branch>] <new-branch>
+   or: git branch [<options>] (-c | -C) [<old-branch>] <new-branch>
+   or: git branch [<options>] [-r | -a] [--points-at]
+   or: git branch [<options>] [-r | -a] [--format]
+
+Generic options
+    -v, --verbose         show hash and subject, give twice for upstream branch
+    -q, --quiet           suppress informational messages
+    -t, --track[=(direct|inherit)]
+                          set branch tracking configuration
+    -u, --set-upstream-to <upstream>
+                          change the upstream info
+    --unset-upstream      unset the upstream info
+    --color[=<when>]      use colored output
+    -r, --remotes         act on remote-tracking branches
+    --contains <commit>   print only branches that contain the commit
+    --no-contains <commit>
+                          print only branches that don't contain the commit
+    --abbrev[=<n>]        use <n> digits to display object names
+
+Specific git-branch actions:
+    -a, --all             list both remote-tracking and local branches
+    -d, --delete          delete fully merged branch
+    -D                    delete branch (even if not merged)
+    -m, --move            move/rename a branch and its reflog
+    -M                    move/rename a branch, even if target exists
+    --omit-empty          do not output a newline after empty formatted refs
+    -c, --copy            copy a branch and its reflog
+    -C                    copy a branch, even if target exists
+    -l, --list            list branch names
+    --show-current        show current branch name
+    --create-reflog       create the branch's reflog
+    --edit-description    edit the description for the branch
+    -f, --force           force creation, move/rename, deletion
+    --merged <commit>     print only branches that are merged
+    --no-merged <commit>  print only branches that are not merged
+    --column[=<style>]    list branches in columns
+    --sort <key>          field name to sort on
+    --points-at <object>  print only branches of the object
+    -i, --ignore-case     sorting and filtering are case insensitive
+    --recurse-submodules  recurse through submodules
+    --format <format>     format to use for the output
+
+
+E:\sample-repository>git branch -l
+* b1
+  branch2
+  branch3
+  main
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>gh pr list
+
+Showing 1 of 1 open pull request in YashKadyan/dummy-project
+
+#1  b1  b1  about 1 hour ago
+
+E:\sample-repository>gh pr merge 1
+X Pull request #1 is not mergeable: the merge commit cannot be cleanly created.
+To have the pull request merged after all the requirements have been met, add the `--auto` flag.
+Run the following to resolve the merge conflicts locally:
+  gh pr checkout 1 && git fetch origin main && git merge origin/main
+
+E:\sample-repository>git branch -l
+  b1
+  branch2
+  branch3
+* main
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is ahead of 'origin/b1' by 4 commits.
+  (use "git push" to publish your local commits)
+
+E:\sample-repository>git merge main
+Already up to date.
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git checkout b1
+Switched to branch 'b1'
+Your branch is ahead of 'origin/b1' by 4 commits.
+  (use "git push" to publish your local commits)
+
+E:\sample-repository>git staus
+git: 'staus' is not a git command. See 'git --help'.
+
+The most similar command is
+        status
+
+E:\sample-repository>git status
+On branch b1
+Your branch is ahead of 'origin/b1' by 4 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        spock-lizard-docker/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git push -u origin main
+Everything up-to-date
+branch 'main' set up to track 'origin/main'.
+
+E:\sample-repository>git push -u origin b1
+Enumerating objects: 1, done.
+Counting objects: 100% (1/1), done.
+Writing objects: 100% (1/1), 228 bytes | 228.00 KiB/s, done.
+Total 1 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/YashKadyan/dummy-project.git
+   def065b..6a33a47  b1 -> b1
+branch 'b1' set up to track 'origin/b1'.
+
+E:\sample-repository>git checkout main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+
+E:\sample-repository>git merge b1
+Updating 2aae041..6a33a47
+Fast-forward
+ sum.java | 8 ++++----
+ t.txt    | 7 +++++++
+ 2 files changed, 11 insertions(+), 4 deletions(-)
+ create mode 100644 t.txt
+
+E:\sample-repository>git status
+On branch main
+Your branch is ahead of 'origin/main' by 5 commits.
+  (use "git push" to publish your local commits)
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        spock-lizard-docker/
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+E:\sample-repository>git merge b1
+Already up to date.
+
+E:\sample-repository>git branch -l
+  b1
+  branch2
+  branch3
+* main
+
+E:\sample-repository>gh pr merge 1
+? What merge method would you like to use? Squash and merge
+? Delete the branch locally and on GitHub? No
+? What's next? Edit commit message
+? What's next? Edit commit subject
+? What's next? Submit
+✓ Squashed and merged pull request #1 (b1)
+
+Now, check the GitHub (Remote) Repository if any changes are shown after merging the pull request.
+
+E:\sample-repository>exit
+
+---------------------------------------
+*** Some Important Points :
+
+1. main branch has the Actual Project.
+2. The other branches of the Project will be having the Additional Features which will be added into the Actual Project.
+3. -u represents upstream.
+---------------------------------------
+*** Essential Commands -
+
+…or create a new repository on the command line
+
+echo "# dummy-project" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/YashKadyan/dummy-project.git
+git push -u origin main
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/YashKadyan/dummy-project.git
+git branch -M main
+git push -u origin main
+
+…or import code from another repository
+You can initialize this repository with code from a Subversion, Mercurial, or TFS project.
+-----------------------------------------------------------------------------
+
+*** Some Important Links -
+
+1. https://github.com/Kunena/Kunena-Forum/wiki/Create-a-new-branch-with-git-and-manage-branches
+2. https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
+3. https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/merging-a-pull-request
+4. GitHub Official Documentation : https://docs.github.com/en/get-started/quickstart/hello-world
+5. Installing the GitHub CLI : https://youtu.be/tm9gdHd9qmE
+6. Resolving Merge Conflicts : https://youtu.be/5qfgyI125eo
+7. Creating a Pull Request : https://youtu.be/Ku9_0Mftiic
+8. Forking a Repository : https://youtu.be/2WiBRNydhTk
+9. Link for Resolving Merge Conflicts on GitHub : https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line
+10. ls is not recognized as an internal or external command : https://danieldusek.com/how-to-add-ls-and-other-linux-commands-into-windows-commandline.html
